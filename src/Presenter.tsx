@@ -1,32 +1,27 @@
 import {useState, FC} from "react";
 import composeHooks from "./compose";
 
-export interface FirstNameProps {
-    firstName?: string
-}
-
-export interface LastNameProps {
-    lastName?: string
-}
-
-export const useFirstName: () => FirstNameProps = () => {
+export const useFirstName = () => {
     const [firstName, setName] = useState('default first name');
     return {firstName};
 };
 
-export const useLastName: () => LastNameProps = () => {
-    const [lastName, setName] = useState('default last name');
+export const useLastName = () => {
+  const [lastName, setName] = useState('default last name');
     return {lastName};
 };
 
+export interface FormPresenterProps {
+  firstName: string,
+  middleName: string,
+  lastName: string,
+}
+
 // Other props (in this case `icon`) can be passed in separately
-const FormPresenter: FC<FirstNameProps & LastNameProps> = ({firstName, lastName}) => (
+const FormPresenter: FC<FormPresenterProps> = ({firstName, middleName, lastName}) => (
     <div className="App">
-        <h1>Hello, {firstName}!</h1>
-        <h1>Hello, {lastName}!</h1>
+      <h1>Hello, {firstName}, {middleName}, {lastName}!</h1>
     </div>
 );
 
-const t : FC = composeHooks({useFirstName, useLastName})(FormPresenter);
-
-export default t;
+export default composeHooks(FormPresenter, {useFirstName, useLastName});
