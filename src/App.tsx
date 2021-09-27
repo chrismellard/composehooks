@@ -2,14 +2,10 @@ import React, {useState} from 'react';
 import './App.css';
 import Dismiss from './dismiss';
 import MyButton from './MyButton';
-import Presenter, {FirstNameProps, useFirstName} from './Presenter';
+import Presenter from './Presenter';
 
 
 function App() {
-    const useForm = (): FirstNameProps => {
-        const [firstName, setName] = useState('');
-        return {firstName};
-    };
   return (
       <div className="App">
         <Dismiss
@@ -17,9 +13,9 @@ function App() {
                 <MyButton onClickHandler={() => dismiss(1)}>Bob</MyButton>
             )}
         />
-          <Presenter firstName='asd' lastName='bob'/>
+          <Presenter middleName='actual middle name' />
       </div>
   );
-};
+}
 
 export default App;
